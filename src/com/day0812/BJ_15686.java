@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 // 치킨 배달
@@ -25,6 +23,7 @@ public class BJ_15686 {
 		graph = new int[n][n];
 		result = new ArrayList<>();
 		chickenPosition = new ArrayList<>();
+		
 		cosme = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine().trim());
@@ -41,28 +40,18 @@ public class BJ_15686 {
 		}
 		houseSize = chickenPosition.size();
 		chickenHouseList = new int[chickenHouse];
-//		HouseList = new boolean[houseSize];
 		com(0,0);
 		Collections.sort(result);
 		System.out.println(result.get(0));
-//		for (Integer i : result) {
-//			System.out.print(i+" ");
-//		}
 
 	}
 	
 	static void com(int index,int count) {
 		if (count == chickenHouse) {
-			// 치킨집 리스트 나옴 houseList에
-//			cal(HouseList);
-//			System.out.println(Arrays.toString(chickenHouseList));
 			cal(chickenHouseList);
 			return ;
 		}
-//		HouseList[count] = true;
-//		subset(count + 1);
-//		HouseList[count] = false;
-//		subset(count + 1);
+
 		for (int i = index; i < houseSize; i++) {
 			chickenHouseList[count] = i;
 			com(i+1,count+1);
@@ -75,7 +64,6 @@ public class BJ_15686 {
 			temp = new ArrayList<Integer>();
 			int cx = cosme.get(j)[0];
 			int cy = cosme.get(j)[1];
-//			System.out.println(x+" "+y);
 			for (int i = 0; i < hl.length; i++) {
 				int x = chickenPosition.get(hl[i])[0];
 				int y = chickenPosition.get(hl[i])[1];
@@ -84,8 +72,6 @@ public class BJ_15686 {
 			Collections.sort(temp);
 			sum += temp.get(0);
 		}
-		
-//		System.out.println(Arrays.toString(hl)+" "+sum);
 		result.add(sum);
 	}
 }

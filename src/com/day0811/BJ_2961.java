@@ -28,8 +28,8 @@ public class BJ_2961 {
 	}
 	
 	static void cal(int count,int sour,int bitter) {
-		if (count == n) {
-			if (sour == 1 && bitter == 0) return; 
+		if (count == n-1) {
+//			if (sour == 1 && bitter == 0) return; 
 			result = Math.min(result, Math.abs(sour-bitter));
 //			System.out.println("sour:"+sour+" bitter : "+bitter+" result :"+result);
 			return;
