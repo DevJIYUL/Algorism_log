@@ -48,8 +48,8 @@ public class SWEA_5644 {
 					A[i][j] = Integer.parseInt(st.nextToken());
 				}
 			}
-			System.out.println(Arrays.toString(userA));
-			System.out.println(Arrays.toString(userB));
+//			System.out.println(Arrays.toString(userA));
+//			System.out.println(Arrays.toString(userB));
 			// graph info
 			for (int i = 0; i < A.length; i++) {
 				int x =A[i][0];
@@ -59,194 +59,72 @@ public class SWEA_5644 {
 				bfs(i+1,y-1,x-1,y-1,x-1,A[i][2]);
 			}
 			
-			for (int[] string : graph) {
-				System.out.println(Arrays.toString(string));
-			}
+//			for (int[] string : graph) {
+//				System.out.println(Arrays.toString(string));
+//			}
 			
 			int ax=0,ay=0,bx = 9,by=9;
-			ArrayList<Integer> arrlst;
-			ArrayList<Integer> brrlst;
-			arrlst = new ArrayList<>();
-			brrlst = new ArrayList<>();
-			int maxValue = 0;
-//			if (graph[ax][ay] !=0) {
-//				for (int j = 1; j < A.length+1; j++) {
-//					if ((graph[ax][ay] & (1<<j))!=0) {
-//						arrlst.add(j);
-//					}
-//				}
-//				if(arrlst.size()>1) {
-//				}else {
-//					scoreA[0] = A[arrlst.get(0)-1][3];
-//				}
-//				
-//			}else {
-//				scoreA[0] = 0;
-//			}
-//			if (graph[bx][by] !=0) {
-////				System.out.println("거리 :"+d+"bx:"+bx+" by"+by+" ");
-//				for (int j = 1; j < A.length+1; j++) {
-//					if ((graph[bx][by] & (1<<j))!=0) {
-//						brrlst.add(j);
-//					}
-//				}
-//				if(brrlst.size()>1) {
-//				}else {
-//					scoreB[0] = A[brrlst.get(0)-1][3];
-//				}
-//
-//			}else {
-//				scoreB[0] = 0;
-//			}
-//
-//			
-//			if (arrlst.size()>1) {
-//				for (int j = 0; j < arrlst.size(); j++) {
-//					for (int j2 = 0; j2 < brrlst.size(); j2++) {
-//						if (arrlst.get(j)==brrlst.get(j2)) {
-//							maxValue = Math.max(maxValue, A[arrlst.get(j)-1][3]/2);
-//						}else {
-//							maxValue = Math.max(maxValue, A[arrlst.get(j)-1][3]);
-//						}
-//						
-//					}
-//				}
-//				scoreA[0] = maxValue;
-//			}
-//			maxValue = 0;
-//			if (brrlst.size()>1) {
-//				for (int j = 0; j < brrlst.size(); j++) {
-//					for (int j2 = 0; j2 < arrlst.size(); j2++) {
-//						if (brrlst.get(j)==arrlst.get(j2)) {
-//							maxValue = Math.max(maxValue, A[brrlst.get(j)-1][3]/2);
-//						}else {
-//							maxValue = Math.max(maxValue, A[brrlst.get(j)-1][3]);
-//							System.out.println(arrlst.get(j2)+" "+maxValue);
-//						}
-//
-//					}
-//				}
-//				scoreB[0] = maxValue;
-//			}
-		
-			for (int d = 0; d < userA.length; d++) {
-				arrlst = new ArrayList<>();
-				brrlst = new ArrayList<>();
-				int i = userA[d];
-				ax = ax + dx[i];
-				ay = ay + dy[i];
-				i = userB[d];
-				bx = bx +dx[i];
-				by = by + dy[i];
-				maxValue = 0;
-				if (graph[ax][ay] !=0) {
-					for (int j = 1; j < A.length+1; j++) {
-						if ((graph[ax][ay] & (1<<j))!=0) {
-							arrlst.add(j);
-						}
-					}
-					if(arrlst.size()>1) {
-					}else {
-						System.out.println(arrlst.get(0));
-						scoreA[d] = A[arrlst.get(0)-1][3];
-						System.out.println("d : "+d+" "+ax+" "+ay+" "+Arrays.toString(scoreA));
-					}
-					
-				}else {
-					scoreA[d] = 0;
-				}
-				if (graph[bx][by] !=0) {
-//					System.out.println("거리 :"+d+"bx:"+bx+" by"+by+" ");
-					for (int j = 1; j < A.length+1; j++) {
-						if ((graph[bx][by] & (1<<j))!=0) {
-							brrlst.add(j);
-						}
-					}
-					if(brrlst.size()>1) {
-					}else {
-						scoreB[d] = A[brrlst.get(0)-1][3];
-					}
-
-				}else {
-					scoreB[d] = 0;
-				}
-//				for (int j = 0; j < arrlst.size(); j++) {
-//					System.out.print(arrlst.get(j)+" ");
-//				}
-//				System.out.println();
-//				for (int j = 0; j < brrlst.size(); j++) {
-//					System.out.print(brrlst.get(j)+" ");
-//				}
-//				System.out.println();
-
-				if (arrlst.size()>1 && brrlst.size()>1) {
-					if (arrlst.size()>brrlst.size()) {
-						result += dou(arrlst,brrlst,d+1);
-					}else {
-						result += dou(brrlst,arrlst,d+1);
-					}
-					System.out.println("d :"+d+" ax :"+ax+"ay :"+ay+" bx :"+bx+" by :"+by);
-					continue;
-				}
-				maxValue = 0;
-				if (arrlst.size()>1 && brrlst.size() == 1) {
-					for (int j = 0; j < arrlst.size(); j++) {
-						for (int j2 = 0; j2 < brrlst.size(); j2++) {
-							if (arrlst.get(j)==brrlst.get(j2)) {
-								maxValue = Math.max(maxValue, A[arrlst.get(j)-1][3]/2);
-							}else {
-								maxValue = Math.max(maxValue, A[arrlst.get(j)-1][3]);
-							}
-							
-						}
-					}
-					scoreA[d] = maxValue;
-				}
-				maxValue = 0;
-				if (brrlst.size()>1 && arrlst.size() == 1) {
-					for (int j = 0; j < brrlst.size(); j++) {
-						for (int j2 = 0; j2 < arrlst.size(); j2++) {
-							if (brrlst.get(j)==arrlst.get(j2)) {
-								maxValue = Math.max(maxValue, A[brrlst.get(j)-1][3]/2);
-							}else {
-								maxValue = Math.max(maxValue, A[brrlst.get(j)-1][3]);
-//								System.out.println(arrlst.get(j2)+" "+maxValue);
-							}
-
-						}
-					}
-					scoreB[d] = maxValue;
-				}
-			}
-			
-			for (int i = 0; i < scoreA.length; i++) {
-				result+= scoreA[i];
-				result+= scoreB[i];
-			}
+			// 제자리
+			cal(ax,ay,bx,by,0);
+			walk(ax,ay,bx,by,0);
 			System.out.println("#"+test+" "+result);
-			System.out.println(Arrays.toString(scoreA));
-			System.out.println(Arrays.toString(scoreB));
 			
+		
+		}
+	}
+	private static void walk(int ax, int ay, int bx, int by, int count) {
+		while(true) {
+			if (count == m) {
+				return;
+			}
+			ax = ax + dx[userA[count]];
+			ay = ay + dy[userA[count]];
+			bx = bx + dx[userB[count]];
+			by = by + dy[userB[count]];
+//			System.out.println(graph[ax][ay]+" "+graph[bx][by]);
+			cal(ax,ay,bx,by,count++);
 		}
 		
-		
 	}
-	private static int dou(ArrayList<Integer> big, ArrayList<Integer> small, int i) {
-		int maxV = 0;
-		for (int j = 0; j < big.size(); j++) {
-			for (int j2 = 0; j2 < small.size(); j2++) {
-				if (big.get(j)==small.get(j2)) {
-					maxV = Math.max(maxV, A[big.get(j)-1][3]);
-//					int t = A[big.get(j)-1][3]/2+A[small.get(j2)-1][3]/2;
-//					maxV = Math.max(maxV, t);
-				}else {
-					int t = A[big.get(j)-1][3]+A[small.get(j2)-1][3];
-					maxV = Math.max(maxV, t);
+	private static void cal(int ax, int ay, int bx, int by,int cnt) {
+		boolean[][] isOn = new boolean[2][a];
+		
+//		System.out.println("d : "+cnt+" "+graph[ax][ay]+" "+graph[bx][by]);
+		for (int i = 0; i < isOn[0].length; i++) {
+			if ((graph[ax][ay] & (1<<i+1)) != 0) {
+				isOn[0][i] = true;
+			}
+			if ((graph[bx][by] &(1<<i+1)) != 0) {
+				isOn[1][i] = true;
+			}
+		}
+//		for (int i = 0; i < isOn.length; i++) {
+//			for (int j = 0; j < isOn[i].length; j++) {
+//				System.out.print(isOn[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+		int value = 0;
+		for (int i = 0; i < isOn[0].length; i++) {
+			for (int j = 0; j < isOn[1].length; j++) {
+				if(isOn[0][i] && isOn[1][j]) {
+					if (i == j) {
+						value = Math.max(value, A[i][3]);
+					}else {
+						value = Math.max(value, A[i][3]+A[j][3]);
+					}
+				}else if (isOn[0][i]) {
+					value = Math.max(value, A[i][3]);
+				}else if (isOn[1][j]) {
+					value = Math.max(value, A[j][3]);
 				}
 			}
 		}
-		return maxV;
+//		System.out.println("value : "+value);
+		result += value;
+		
 	}
+
 	static void bfs(int num,int setX,int setY,int x,int y,int count) {
 		if (Math.abs(x-setX)+Math.abs(y-setY)>=count) {
 //			System.out.println("over");
