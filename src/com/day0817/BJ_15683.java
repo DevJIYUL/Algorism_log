@@ -94,8 +94,11 @@ public class BJ_15683 {
 				int x = cctv.get(i)[0];
 				int y = cctv.get(i)[1];
 				while(true) {
-					x += tar[j][0];
-					y += tar[j][1];
+					if (graph[cctv.get(i)[0]][cctv.get(i)[1]] == 1) {
+						
+						x += tar[j][0];
+						y += tar[j][1];
+					}
 					if (x <0 || x>=n || y <0|| y>=m || temp[x][y] == 6) {
 						break;
 					}
