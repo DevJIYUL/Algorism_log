@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class BJ_15683 {
-	static int n,m;
+	static int n,m,result;
 	static ArrayList<int[]> cctv;
 	static int[][] temp;
 	static int[][] graph;
-	static int[][] one = {{-1,0},{0,1},{1,0},{0,-1}};
+	static int[][][] one = {{{-1,0}},{{0,1}},{{1,0}},{{0,-1}}};
 	static int[][][] two = {{{-1,0},{1,0}},{{0,1},{0,-1}}};
 	static int[][][] three = {
 			{{-1,0},{0,1}},
@@ -39,6 +39,7 @@ public class BJ_15683 {
 		StringTokenizer st = new StringTokenizer(br.readLine().trim());
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken());
+		result= Integer.MAX_VALUE;
 		type = new HashMap<>();
 		type.put(1, 4);
 		type.put(2, 2);
@@ -46,6 +47,7 @@ public class BJ_15683 {
 		type.put(4, 4);
 		type.put(5, 1);
 		graph = new int[n][m];
+		temp = new int[n][m];
 		cctv = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine().trim());
@@ -56,22 +58,24 @@ public class BJ_15683 {
 				}
 			}
 		}
-		for (int[] string : graph) {
-			System.out.println(Arrays.toString(string));
-		}
+//		for (int[] string : graph) {
+//			System.out.println(Arrays.toString(string));
+//		}
 		visited = new boolean[cctv.size()];
 		number = new int[cctv.size()];
-		// cctv 위치 저장
+		// cctv 위치 저장 확인 코드
 		
-		for (int i = 0; i < cctv.size(); i++) {
-			System.out.println(cctv.get(i)[0]+" "+cctv.get(i)[1]);
-		}
+//		for (int i = 0; i < cctv.size(); i++) {
+//			System.out.println(cctv.get(i)[0]+" "+cctv.get(i)[1]);
+//		}
 
 		permutate(0, cctv.size());
+		System.out.println(result);
 	}
 	static void permutate(int count,int n) {
 		if (count == n) {
-			System.out.println(Arrays.toString(number));
+			// 어떤 조합이 만들어졌는지 확인 코드
+//			System.out.println(Arrays.toString(number));
 			makeSite(number);
 			
 			return;
@@ -79,16 +83,23 @@ public class BJ_15683 {
 
 		for(int j = 0, size =type.get(graph[cctv.get(count)[0]][cctv.get(count)[1]]);j <size ;j++) {
 			number[count] = j;
-//				System.out.println(j);
 			permutate(count+1, n);
 			
 		}
 
 	}
 	private static void makeSite(int[] number2) {
-		temp = graph.clone() ;
+		for (int i = 0; i < temp.length; i++) {
+			for (int j = 0; j < temp[i].length; j++) {
+				temp[i][j] = graph[i][j];
+			}
+		}
 		for (int i = 0; i < number2.length; i++) {
 			int[][] tar = find(cctv.get(i),number2[i]);
+			// tar에 어떤 값들이 들어오는지 테스트 코드
+//			for (int j = 0; j < tar.length; j++) {
+//				System.out.println(Arrays.toString(tar[j]));
+//			}
 			// 어느 방향으로 갈지 방향 tar에 저장
 			for (int j = 0; j < tar.length; j++) {
 				int x = cctv.get(i)[0];
@@ -106,14 +117,25 @@ public class BJ_15683 {
 				}
 			}
 		}
-		for (int[] is : temp) {
-			System.out.println(Arrays.toString(is));
+		int zero = 0;
+		for (int i = 0; i < temp.length; i++) {
+			for (int j = 0; j < temp[i].length; j++) {
+				if (temp[i][j] == 0) {
+					zero++;
+				}
+			}
 		}
+		result = Math.min(result, zero);
+		// 각 경우의 수에 대한 방의 사각지대와 최소값 테스트 코드
+//		for (int[] is : temp) {
+//			System.out.println(Arrays.toString(is));
+//		}
+//		System.out.println("result :"+zero);
 	}
 	private static int[][] find(int[] is,int index) {
 		switch (graph[is[0]][is[1]]) {
 		case 1:
-			return one;
+			return one[index];
 		case 2:
 			return two[index];
 		case 3:
