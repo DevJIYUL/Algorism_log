@@ -3,6 +3,7 @@ package com.day0819;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
@@ -58,7 +59,6 @@ public class BJ_17135 {
 //		}
 //		System.out.println(temp.length);
 		while (!isClear(temp)) {
-			int kill = 0;
 			boolean[][] attcked = new boolean[n][m];
 			// 가장 가까운 적 3명 찾아서 죽이고 0 하고 count
 			// 맨 마지막 부터 탐색
@@ -74,7 +74,6 @@ public class BJ_17135 {
 			});
 			for (int gungsu = 0; gungsu < setGungsu2.length; gungsu++) {
 				// 궁수에서 가장 가까운 적의 위치 찾기
-				boolean isDone = false;
 				for (int i = temp.length-1; i >= 0; i--) {
 					for (int j = 0; j < temp[i].length; j++) {
 						// 적발견
@@ -119,39 +118,6 @@ public class BJ_17135 {
 					}
 				}
 			}
-			
-			
-//			HashSet<int[]> check = new HashSet<>();
-//			HashMap<int[], Integer> check = new HashMap<>();
-//			ArrayList<int[]> check = new ArrayList<>();
-//			if (!pq.isEmpty()) {
-//				int[] close = pq.poll();
-//				if (!check.contains(new int[] {close[1],close[2]})) {
-//					check.add(new int[] {close[1],close[2]});
-//				}
-//				temp[close[1]][close[2]] = 0;
-//			}
-//			if (!pq1.isEmpty()) {
-//				int[] close = pq1.poll();
-//				if (!check.contains(new int[] {close[1],close[2]})) {
-//					check.add(new int[] {close[1],close[2]});
-//				}
-//				temp[close[1]][close[2]] = 0;
-//			}
-//			if (!pq2.isEmpty()) {
-//				int[] close = pq2.poll();
-//				if (!check.contains(new int[] {close[1],close[2]})) {
-//					check.add(new int[] {close[1],close[2]});
-//				}
-//				temp[close[1]][close[2]] = 0;
-//			}
-//			for (int i = 0; i < check.size(); i++) {
-//				System.out.print(check.get(i)[0]+" "+check.get(i)[1]+"|");
-//			}
-//			System.out.println();
-//			System.out.println(" 사이즈 "+check.size());
-			
-			
 			
 			play += check;
 			temp = moveEnemy(temp);
