@@ -1,5 +1,5 @@
 package com.day0823;
-
+// 최소 스패닝 트리
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.StringTokenizer;
-class Edge{
+class Edge implements Comparable<Edge>{
 	int a;
 	int b;
 	int c;
@@ -20,6 +20,11 @@ class Edge{
 //	public int compareTo(Edge e1, Edge e2) {
 //		return e1.c - e2.c;
 //	}
+	@Override
+	public int compareTo(Edge o) {
+		// TODO Auto-generated method stub
+		return this.c - o.c;
+	}
 }
 public class SWEA_3124 {
 	static int v,e;
@@ -43,17 +48,17 @@ public class SWEA_3124 {
 				int a = Integer.parseInt(st.nextToken());
 				int b  = Integer.parseInt(st.nextToken());
 				int c  = Integer.parseInt(st.nextToken());
-				node.add(new Edge(c, a, b));
+				node.add(new Edge(Integer.valueOf(a), Integer.valueOf(b), Integer.valueOf(c)));
 			}
-			Collections.sort(node, (o1, o2) -> o1.c-o2.c );;
+			Collections.sort(node);
 			for (int j = 0; j < v+1; j++) {
 				parents[j] = j;
 			}
 			for (int j = 0; j < e; j++) {
-				System.out.println(node.get(j).a+" "+node.get(j).b+" "+node.get(j).c);
-				System.out.println(Arrays.toString(parents));
+//				System.out.println(node.get(j).a+" "+node.get(j).b+" "+node.get(j).c);
+//				System.out.println(Arrays.toString(parents));
 				if (findparents(node.get(j).a) == findparents(node.get(j).b)) {
-					
+					continue;
 				}else {
 					union(node.get(j).a,node.get(j).b);
 					result += node.get(j).c;
@@ -62,6 +67,7 @@ public class SWEA_3124 {
 			System.out.println("#"+i+" "+result);
 		}
 	}
+
 	private static void union(int a, int b) {
 		a = findparents(a);
 		b = findparents(b);
@@ -74,8 +80,10 @@ public class SWEA_3124 {
 	private static int findparents(int x) {
 		if (parents[x] == x) {
 			return x;
+		}else {
+			return parents[x] = findparents(parents[x]);
+			
 		}
-		return parents[x] = findparents(parents[x]);
 	}
 
 }
