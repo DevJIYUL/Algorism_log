@@ -60,6 +60,7 @@ public class BJ_13023 {
 			}
 			visited[i] = true;
 			dfs(i,v+1);
+			visited[i] = false;
 		}
 		
 	}
