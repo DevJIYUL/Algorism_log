@@ -1,14 +1,10 @@
 package com.day0823;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.StringTokenizer;
-
-import org.omg.CORBA.UnionMember;
 
 // 창용 마을 무리의 개수
 public class SWEA_7465 {
