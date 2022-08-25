@@ -48,7 +48,6 @@ public class DiceTest {
 		
 	}
 	// 순열
-	
 	private static void dice2(int cnt) {
 		if(cnt == n){
 			total++;
@@ -79,6 +78,7 @@ public class DiceTest {
 	}
 	// 조합
 	private static void dice4(int cnt,int start){
+		System.out.println("count : "+cnt+" start :"+start);
 		if (cnt == n) {
 			total++;
 			System.out.println(Arrays.toString(numbers));

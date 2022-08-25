@@ -1,5 +1,6 @@
 package com.day0811;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -25,6 +26,7 @@ public class CompleteBinaryTree {
 
 	public void bfs() {
 		Queue<Integer> queue = new LinkedList<>();
+		System.out.println(queue.size());
 		queue.offer(1); // 루트노드 인덱스 부터
 		
 		while (!queue.isEmpty()) { // 방문 대상이 있을때 까지 반복

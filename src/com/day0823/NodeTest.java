@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class Node{
-	int prev;
-	int next;
-	public Node(int prev, int next) {
-		this.prev = prev;
-		this.next = next;
-	}
-	public void show() {
-		System.out.print("("+prev+","+next+")");
-	}
-}
 public class NodeTest {
+	static class Node{
+		int prev;
+		int next;
+		public Node(int prev, int next) {
+			this.prev = prev;
+			this.next = next;
+		}
+		public void show() {
+			System.out.print("("+prev+","+next+")");
+		}
+	}
 	static ArrayList<ArrayList<Node>> graph;
 	public static void main(String[] args) {
 		graph = new ArrayList<ArrayList<Node>>();

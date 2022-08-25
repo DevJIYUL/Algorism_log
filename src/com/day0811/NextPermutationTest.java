@@ -12,13 +12,15 @@ public class NextPermutationTest {
 		for (int i = 0; i < n; i++) {
 			input[i] = sc.nextInt();
 		}
-		
+		long start =System.currentTimeMillis();
 		// 전처리 : 순열에 쓰일 수들을 오름차순 정렬
 		Arrays.sort(input);
 		
 		do {
 			System.out.println(Arrays.toString(input));
 		} while (np(input));
+		long end = System.currentTimeMillis();
+		System.out.println(" 수행 시간 : "+(end-start)+" ms");
 	}
 
 	

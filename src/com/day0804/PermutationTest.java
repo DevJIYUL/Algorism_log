@@ -13,9 +13,11 @@ public class PermutationTest {
 		n = sc.nextInt();
 		visited = new boolean[n+1];
 		numbers = new int[n];
-		
+		long start = System.currentTimeMillis();
 		permutate(0);
-		System.out.println("총 경우의 수 : "+total);
+		long end = System.currentTimeMillis();
+		System.out.println(" 수행 시간 : "+(end-start)+" ms");
+//		System.out.println("총 경우의 수 : "+total);
 	}
 	static void permutate(int count) {
 		if (count == n) {

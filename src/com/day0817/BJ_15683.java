@@ -75,7 +75,7 @@ public class BJ_15683 {
 	static void permutate(int count,int n) {
 		if (count == n) {
 			// 어떤 조합이 만들어졌는지 확인 코드
-//			System.out.println(Arrays.toString(number));
+			System.out.println(Arrays.toString(number));
 			makeSite(number);
 			
 			return;

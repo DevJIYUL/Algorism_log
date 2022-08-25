@@ -26,8 +26,6 @@ public class SWEA_5644 {
 			userB = new int[m];
 			graph = new int[10][10];
 			visited = new int[10][10];
-			scoreA = new int[m+1];
-			scoreB = new int[m+1];
 			result = 0;
 			for (int i = 0; i < 10; i++) {
 				Arrays.fill(graph[i], 0);
@@ -105,19 +103,35 @@ public class SWEA_5644 {
 //			System.out.println();
 //		}
 		int value = 0;
-		for (int i = 0; i < isOn[0].length; i++) {
-			for (int j = 0; j < isOn[1].length; j++) {
-				if(isOn[0][i] && isOn[1][j]) {
-					if (i == j) {
+//		for (int i = 0; i < isOn[0].length; i++) {
+//			for (int j = 0; j < isOn[1].length; j++) {
+//				if(isOn[0][i] && isOn[1][j]) {
+//					if (i == j) {
+//						value = Math.max(value, A[i][3]);
+//					}else {
+//						value = Math.max(value, A[i][3]+A[j][3]);
+//					}
+//				}else if (isOn[0][i]) {
+//					value = Math.max(value, A[i][3]);
+//				}else if (isOn[1][j]) {
+//					value = Math.max(value, A[j][3]);
+//				}
+//			}
+//		}
+		for (int i = 0; i < a; i++) {
+			for (int j = 0; j < a; j++) {
+				if (((graph[ax][ay] & (1<<i+1))!=0) && ((graph[bx][by] & (1<<j+1)) != 0)) {
+					if (i==j) {
 						value = Math.max(value, A[i][3]);
 					}else {
 						value = Math.max(value, A[i][3]+A[j][3]);
 					}
-				}else if (isOn[0][i]) {
+				} else if ((graph[ax][ay] & (1<<i+1))!=0) {
 					value = Math.max(value, A[i][3]);
-				}else if (isOn[1][j]) {
+				} else if ((graph[bx][by] & (1<<j+1))!=0) {
 					value = Math.max(value, A[j][3]);
 				}
+
 			}
 		}
 //		System.out.println("value : "+value);

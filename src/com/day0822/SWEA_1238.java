@@ -17,8 +17,9 @@ public class SWEA_1238 {
 	static boolean[] visited;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		for (int i = 1; i <= 10; i++) {
+		StringTokenizer st = new StringTokenizer(br.readLine().trim());
+		int test_case = Integer.parseInt(st.nextToken());
+		for (int i = 1; i <= test_case; i++) {
 			st = new StringTokenizer(br.readLine().trim());
 			n = Integer.parseInt(st.nextToken());
 			start = Integer.parseInt(st.nextToken());
