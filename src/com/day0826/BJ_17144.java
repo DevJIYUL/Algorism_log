@@ -29,26 +29,25 @@ public class BJ_17144 {
 			st = new StringTokenizer(br.readLine().trim());
 			for (int j = 0; j < c; j++) {
 				graph[i][j] = Integer.parseInt(st.nextToken());
-				if(graph[i][j]!=0 && graph[i][j] != -1) {
-					queue.add(new int[] {i,j});
-				}else if (graph[i][j] == -1) {
+				if (graph[i][j] == -1) {
 					mechine.add(new int[] {i,j});
 				}
 			}
-			System.out.println(Arrays.toString(graph[i]));
+//			System.out.println(Arrays.toString(graph[i]));
 		}
 //		System.out.println(queue.size());
 		// 미세먼지 확산
 		
 		for (int i = 0; i < t; i++) {
-			graph = spread();
+			spread();
 			
 		}
 		int sum = 0;
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
-				if(graph[i][j] <= -1)continue;
-				sum+= graph[i][j];
+				if(graph[i][j] > 0) {
+					sum+= graph[i][j];
+				}
 			}
 //			System.out.println(Arrays.toString(graph[i]));
 		}
@@ -61,68 +60,60 @@ public class BJ_17144 {
 		for (int i = 0; i < r; i++) {
 			for (int j = 0; j < c; j++) {
 				temp[i][j] = graph[i][j];
+				if(graph[i][j] >0) {
+					queue.offer(new int[] {i,j});
+				}
 			}
 		}
-		Queue<int[]> temp_q = new LinkedList<>();
+//		Queue<int[]> temp_q = new LinkedList<>();
 		while (!queue.isEmpty()) {
 			int[] mon = queue.poll();
-			int value = graph[mon[0]][mon[1]];
+			int value = temp[mon[0]][mon[1]];
 			int count = 0;
 			int spreadValue = value/5;
+//			System.out.println(spreadValue);
 			for (int i = 0; i < 4; i++) {
 				int nx = mon[0] + dx[i];
 				int ny = mon[1] + dy[i];
 				
 				if(nx<0||ny<0||nx >= r|| ny>=c||graph[nx][ny] == -1) continue;
-				temp[nx][ny] += spreadValue;
+				graph[nx][ny] += spreadValue;
 				count++;
-				temp_q.offer(new int[] {nx,ny});
+				graph[mon[0]][mon[1]] -= spreadValue;
 			}
-			temp[mon[0]][mon[1]] = temp[mon[0]][mon[1]]-spreadValue*count;
-			
 		}
-//		queue.offer(temp_q.poll());
-		while (!temp_q.isEmpty()) {
-			queue.offer(temp_q.poll());
-		}
-//		temp[mechine.get(0)[0]][mechine.get(0)[1]] = 0;
-//		temp[mechine.get(1)[0]][mechine.get(1)[1]] = 0;
-		System.out.println("---------------------");
-		for (int j = 0; j < r; j++) {
-			System.out.println(Arrays.toString(temp[j]));
-		}
+		
 		for (int i = mechine.get(0)[0]; i >0 ; i--) {
-			temp[i][0] = temp[i-1][0];
+			graph[i][0] = graph[i-1][0];
 		}
 		for (int i = 0; i < c-1; i++) {
-			temp[0][i] = temp[0][i+1];
+			graph[0][i] = graph[0][i+1];
 		}
 		for (int i = 0; i < mechine.get(0)[0]; i++) {
-			temp[i][c-1] = temp[i+1][c-1];
+			graph[i][c-1] = graph[i+1][c-1];
 		}
 		for (int i = r; i >0; i--) {
-			temp[mechine.get(0)[0]][i] = temp[mechine.get(0)[0]][i-1];
+			graph[mechine.get(0)[0]][i] = graph[mechine.get(0)[0]][i-1];
 		}
-		temp[mechine.get(0)[0]][mechine.get(0)[1]] = -1;
+		graph[mechine.get(0)[0]][mechine.get(0)[1]] = -1;
+		graph[mechine.get(0)[0]][mechine.get(0)[1]+1] = 0;
 		
 		for (int i = mechine.get(1)[0]; i < r-1; i++) {
-			temp[i][0] = temp[i+1][0];
+			graph[i][0] = graph[i+1][0];
 		}
 		for (int i = 0; i < c-1; i++) {
-			temp[r-1][i] = temp[r-1][i+1];
+			graph[r-1][i] = graph[r-1][i+1];
 		}
 		for (int i = r-1; i > mechine.get(1)[0]; i--) {
-			temp[i][c-1] = temp[i-1][c-1];
+			graph[i][c-1] = graph[i-1][c-1];
 		}
 		for (int i = r; i >0; i--) {
-			temp[mechine.get(1)[0]][i] = temp[mechine.get(1)[0]][i-1];
+			graph[mechine.get(1)[0]][i] = graph[mechine.get(1)[0]][i-1];
 		}
-		temp[mechine.get(1)[0]][mechine.get(1)[1]] = -1;
-		System.out.println("---------------------");
-		for (int j = 0; j < r; j++) {
-			System.out.println(Arrays.toString(temp[j]));
-		}
-		return temp;
+		graph[mechine.get(1)[0]][mechine.get(1)[1]] = -1;
+		graph[mechine.get(1)[0]][mechine.get(1)[1]+1] = 0;
+		
+		return graph;
 		
 		
 		
