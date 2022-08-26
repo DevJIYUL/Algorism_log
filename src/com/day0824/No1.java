@@ -61,41 +61,51 @@ public class No1 {
 	private static void cal(int[] fishGatePermutate, int[] fishPlace,int g) {
 		System.out.println(Arrays.toString(fishGatePermutate)+" "+Arrays.toString(fishPlace)+" "+g);
 		if(g == 3) {
-			System.out.println(Arrays.toString(fishPlace));
+			System.out.println(Arrays.toString(fishPlace)+"***");
 			int sum =0;
-			for (int i = 0; i < fishPlace.length; i++) {
+			for (int i = 1; i < fishPlace.length; i++) {
 				sum+= fishPlace[i];
 			}
 			answer = Math.min(answer, sum);
+			System.out.println("asnwer : "+answer);
 			return ;
 		}
-		System.out.println(Arrays.toString(fishPlace));
 		for (int i = 0; i < gate.get(fishGatePermutate[g]); i++) {
+			System.out.println(Arrays.toString(fishPlace));
 			// 최단거리 좌표
-			ArrayList<Integer> min = new ArrayList<>();
+			ArrayList<Integer> minV = new ArrayList<>();
+			int[] minV = new int[2];
 			int value = Integer.MAX_VALUE;
-			for (int k = 1; k < fishPlace.length; k++) {
+			int index = 0;
+			for (int k = fishPlace.length-1; k >=1 ; k--) {
 				if ((value >= Math.abs(fishGatePermutate[g]-k)+1) && fishPlace[k] == 0) {
-					value = Math.min(value, Math.abs(g-k)+1);
-					min.add(k);
+					if(value == Math.min(value, Math.abs(fishGatePermutate[g]-k)+1) ) {
+//						if(minV.size()>2) minV.remove(0);
+//						minV.add(k);
+						int o = k - fishGatePermutate[g];
+						minV = new int[] {fishGatePermutate[g]+o,fishGatePermutate[g]-o};
+//						minV.add(fishGatePermutate[g]+o);
+//						minV.add(fishGatePermutate[g]-o);
+					}
+					value = Math.min(value, Math.abs(fishGatePermutate[g]-k)+1);
+					index = k;
 				}
 			}
-			if(min.size() == 0) continue;
-			if(i == gate.get(fishGatePermutate[g])-1) {
-				if(min.size()>1) {
-					for (int k = 0; k < min.size(); k++) {
-						fishPlace[min.get(k)] = value;
-						cal(fishGatePermutate,fishPlace,g+1);
-						fishPlace[min.get(k)] = 0;
-					}
-				}else {
-					fishPlace[min.get(0)] = value;
+			System.out.println(" 최소 값 : "+value+" 인덱스 : "+index+" ");
+//			if(min.size() == 0) continue;
+//			if(i == gate.get(fishGatePermutate[g])-1) {
+			if(minV[0]!=minV[1]) {
+				for (int k = 0; k < minV.length; k++) {
+					fishPlace[minV[k]] = value;
 					cal(fishGatePermutate,fishPlace,g+1);
-					fishPlace[min.get(0)] = 0;
+					fishPlace[minV[k]] = 0;
 				}
 			}else {
-				fishPlace[min.get(0)] = value;
+				fishPlace[index] = value;
+				cal(fishGatePermutate,fishPlace,g+1);
+//					fishPlace[index] = 0;
 			}
+
 		}	
 	}
 }
