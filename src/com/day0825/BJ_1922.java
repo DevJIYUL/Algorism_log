@@ -34,6 +34,7 @@ public class BJ_1922 {
 			graph[y][x] = cost;
 		}
 		mst_prim();
+		System.out.println(Arrays.toString(minEdge));
 		System.out.println(result);
 	}
 	private static void mst_prim() {

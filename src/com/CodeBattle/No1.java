@@ -1,5 +1,5 @@
-package com.day0824;
-
+package com.CodeBattle;
+// 낚시터 자리잡기
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,17 +33,17 @@ public class No1 {
 				gate.put(key, value);
 				input[j] = key;
 			}
-			System.out.println(gate);
+//			System.out.println(gate);
 			permutate(0);
-			
-			System.out.println("#"+i+" "+answer);
+//			cal(new int[] { 4, 6, 10 }, fishPlace = new int[n + 1], 0);
+			System.out.println("#" + i + " " + answer);
 		}
 	}
 
 	private static void permutate(int count) {
 		if (count == 3) {
-			System.out.println(Arrays.toString(fishGatePermutate));
-			fishPlace = new int[n+1];
+//			System.out.println(Arrays.toString(fishGatePermutate));
+			fishPlace = new int[n + 1];
 			cal(fishGatePermutate,fishPlace,0);
 			return;
 		}
@@ -57,55 +57,59 @@ public class No1 {
 			fishGateVisted[i] = false;
 		}
 	}
+
 	// 재귀
-	private static void cal(int[] fishGatePermutate, int[] fishPlace,int g) {
-		System.out.println(Arrays.toString(fishGatePermutate)+" "+Arrays.toString(fishPlace)+" "+g);
+	private static void cal(int[] fishGatePermutate, int[] fishPlace, int g) {
+//		System.out.println(Arrays.toString(fishGatePermutate) + " " + Arrays.toString(fishPlace) + " " + g);
+
 		if(g == 3) {
-			System.out.println(Arrays.toString(fishPlace)+"***");
+//			System.out.println(Arrays.toString(fishPlace)+"***");
 			int sum =0;
 			for (int i = 1; i < fishPlace.length; i++) {
 				sum+= fishPlace[i];
 			}
 			answer = Math.min(answer, sum);
-			System.out.println("asnwer : "+answer);
-			return ;
+//			System.out.println("asnwer : "+answer);
+			return;
 		}
 		for (int i = 0; i < gate.get(fishGatePermutate[g]); i++) {
-			System.out.println(Arrays.toString(fishPlace));
+//			System.out.println(Arrays.toString(fishPlace));
 			// 최단거리 좌표
-			ArrayList<Integer> minV = new ArrayList<>();
+//			ArrayList<Integer> minV = new ArrayList<>();
 			int[] minV = new int[2];
 			int value = Integer.MAX_VALUE;
 			int index = 0;
-			for (int k = fishPlace.length-1; k >=1 ; k--) {
-				if ((value >= Math.abs(fishGatePermutate[g]-k)+1) && fishPlace[k] == 0) {
-					if(value == Math.min(value, Math.abs(fishGatePermutate[g]-k)+1) ) {
-//						if(minV.size()>2) minV.remove(0);
-//						minV.add(k);
-						int o = k - fishGatePermutate[g];
-						minV = new int[] {fishGatePermutate[g]+o,fishGatePermutate[g]-o};
-//						minV.add(fishGatePermutate[g]+o);
-//						minV.add(fishGatePermutate[g]-o);
-					}
-					value = Math.min(value, Math.abs(fishGatePermutate[g]-k)+1);
+			for (int k = fishPlace.length - 1; k >= 1; k--) {
+//				System.out.println(k + " " + gate.get(fishGatePermutate[g]));
+				if ((fishPlace[k] == 0) && value > (Math.abs(fishGatePermutate[g] - k) + 1)) {
+					value = Math.min(value, (Math.abs(fishGatePermutate[g] - k) + 1));
 					index = k;
+				} else if ((fishPlace[k] == 0) && value == (Math.abs(fishGatePermutate[g] - k) + 1)) {
+					value = Math.min(value, (Math.abs(fishGatePermutate[g] - k) + 1));
+					index = k;
+					minV[0] = k;
+					minV[1] = (fishGatePermutate[g] - k) + fishGatePermutate[g];
 				}
 			}
-			System.out.println(" 최소 값 : "+value+" 인덱스 : "+index+" ");
-//			if(min.size() == 0) continue;
-//			if(i == gate.get(fishGatePermutate[g])-1) {
-			if(minV[0]!=minV[1]) {
-				for (int k = 0; k < minV.length; k++) {
-					fishPlace[minV[k]] = value;
-					cal(fishGatePermutate,fishPlace,g+1);
-					fishPlace[minV[k]] = 0;
+			if (i == gate.get(fishGatePermutate[g]) - 1) {
+				if (minV[0] != minV[1]) {
+					fishPlace[minV[0]] = value;
+					int[] temp = fishPlace.clone();
+					cal(fishGatePermutate,temp, g + 1);
+					fishPlace[minV[0]] = 0;
+					fishPlace[minV[1]] = value;
+					temp = fishPlace.clone();
+					cal(fishGatePermutate, temp, g + 1);
+					fishPlace[minV[1]] = 0;
+				} else {
+					fishPlace[index] = value;
+					cal(fishGatePermutate, fishPlace, g + 1);
 				}
-			}else {
+			} else {
 				fishPlace[index] = value;
-				cal(fishGatePermutate,fishPlace,g+1);
-//					fishPlace[index] = 0;
+//				cal(fishGatePermutate,fishPlace,g+1);
 			}
-
-		}	
+//			System.out.println(" 최소 값 : " + value + " 인덱스 : " + index + " " + Arrays.toString(minV));
+		}
 	}
 }
