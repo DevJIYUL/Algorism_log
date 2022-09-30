@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Insert title here</title>
+
+</head>
+<body>
+	<hr>
+	<div class="1">1. max(a, b): 숫자 두개를 입력 받아 큰 수를 리턴 return (a > b)? a: b
+		<input type="text" id="input1" placeholder="숫자를 입력하세요">
+		<input type="text" id="input11" placeholder="숫자를 입력하세요">
+		<button id="button1" onclick="max()">최댓값은 무엇일까요?</button>
+		<h1 id="input111"></h1>
+	</div>
+	<hr>
+	<div class="2">2. printName(name): 이름을 입력 받아 그 앞에 'hello!'를 붙여 브라우저에 출력
+		<input type="text" id="input2" placeholder="이름을 입력하세요" onkeyup="printName()" >
+		<h1 id="h12"></h1>
+	</div>
+	<hr>
+	<div id="3">3. getArea(r): 반지름 r을 입력 받아 원면적을 계산해 리턴
+		<input type="text" id="input3" placeholder="원의 반지름을 입력하세요" onkeyup="getArea()">
+		<h1 id="h3"></h1>
+	</div>
+	<hr>
+	<div id="4">4. reverse(flag): boolean 값 한개를 입력 받아 그 반대의 값을 리턴 return !flag
+		<input type="text" id="input4" placeholder="true 혹은 false 를 입력하세요" onkeyup="reverse()">
+		<h1 id="h4"></h1>
+	</div>
+	<hr>
+	<div id="5">5. sum(arr): 정수형 배열 하나를 입력 받아 그 안의 값을 모두 더해 리턴
+		<input type="text" id="input5" placeholder="숫자입력">
+		<button onclick="sum()">입력</button>
+		<h1 id="h5"></h1>
+	</div>
+	<hr>
+	<div id="6">6. loopString(msg, count): 문자열 msg를 count번 만큼 반복해 브라우저에 한줄에 하나씩 출력
+		<div id="ul6">
+			
+		</div>
+
+	</div>
+	<hr>
+	<div id="7">7. calc(a, b, op):숫자 두개와(a, b)와 연산자(op: +,-,*, - 중 하나) 하나를 입력 받아 연산 수행 후 결과를 alert()로 출력
+		<input type="text" id="input71" placeholder="숫자 입력">
+		<input type="text" id="input72" placeholder="숫자 입력">
+		<input type="text" id="input73" placeholder="연산자">
+		<button onclick="calc()" >계산</button>
+	</div>
+	<hr>
+	<div class="8">8. getLength(str): 전달 받은 str문자열의 길이 출력
+		<input type="text" id="input8" placeholder="입력하세요" onkeyup="getLength()" >
+		<h1 id="h8"></h1>
+	</div>
+	<hr>
+	<div class="9">9. showAlert(msg): 전달 받은 문자열 내용으로 경고창 띄우기
+		<input type="text" id="input9" placeholder="입력하세요" >
+		<button id="button9" onclick="showAlert()">경고!!</button>
+	</div>
+	<hr>
+	<div id="10">10. absSum(x,y): 두 숫자의 절대값의 합 리턴
+		<h1 id="h10">absSum(-10,-3)?</h1>
+	</div>
+	<script type="text/javascript">
+		
+		function max(){
+			let a = document.querySelector("#input1").value;
+			let b = document.querySelector("#input11").value;
+			c = (a>b) ? a: b;
+			console.log(c);
+			document.querySelector("#input111").innerHTML = c;
+			return ;
+		}
+		function printName(){
+			h1 = document.querySelector("#input2").value;
+			h1 = "hello! " + h1;
+			document.querySelector("#h12").innerHTML = h1;
+			
+		}
+		function getArea(){
+			input = document.querySelector("#input3").value;
+			a = input*input*Math.PI;
+			document.querySelector("#h3").innerHTML = a;
+		}
+		function reverse(){
+			input = document.querySelector("#input4").value;
+			if(input == "false" || input == "true"){
+				if(input == "false"){
+					a = "true";
+				}else{
+					a = "false";
+				}
+			}
+			document.querySelector("#h4").innerHTML = a;
+		}
+		let numbers = new Array(); 
+		function sum(){
+			let int = document.querySelector("#input5").value;
+			numbers.push(int);
+			document.querySelector("#input5").value = null;
+			console.log(numbers);
+			sum1 = 0;
+			numbers.forEach(element => {
+				console.log(element);
+				sum1 = sum1 + parseInt(element);
+			});
+			document.querySelector("#h5").innerHTML = sum1;
+		}
+		function loopString(msg,count){
+			let a = document.querySelector("#ul6");
+			let poll =`<ul>`;
+			for (let index = 0; index <parseInt(count); index++) {
+				console.log(msg+" "+ count);
+				poll += `<li>${msg}</li>`;
+				;
+			}
+			poll += `</ul>`;
+			a.innerHTML = poll;
+		}
+		loopString("hi" , 6);
+		function calc(){
+			let a = document.querySelector("#input71").value;
+			let b = document.querySelector("#input72").value;
+			let c = document.querySelector("#input73").value;
+			 a = parseInt(a);
+			 b = parseInt(b);
+			if(c=="+"){
+				alert(a+b);
+			}else if(c=="-"){
+				alert(a-b);
+			}else if(c=="*"){
+				alert(a*b);
+			}else if(c== "/"){
+				alert(a/b);
+			}else{
+				alert("입력이 잘못됐어요")
+			}
+		}
+		function getLength(){
+			h1 = document.querySelector("#input8").value;
+			let len = h1.length;
+			document.querySelector("#h8").innerHTML = len;
+
+		}
+		function showAlert(){
+			h1 = document.querySelector("#input9").value;
+			alert(h1);
+		}
+		function absSum(){
+			let result = Math.abs(-10)+Math.abs(-3)
+			h1 = document.querySelector("#h10");
+			h1.innerHTML =  result;
+		}
+		absSum();
+		//
+		// 
+</script>
+</body>
+
+</html>

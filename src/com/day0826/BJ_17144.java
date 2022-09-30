@@ -89,7 +89,7 @@ public class BJ_17144 {
 		for (int i = 0; i < mechine.get(0)[0]; i++) {
 			graph[i][c-1] = graph[i+1][c-1];
 		}
-		for (int i = r; i >0; i--) {
+		for (int i = c-1; i >0; i--) {
 			graph[mechine.get(0)[0]][i] = graph[mechine.get(0)[0]][i-1];
 		}
 		graph[mechine.get(0)[0]][mechine.get(0)[1]] = -1;
@@ -104,7 +104,7 @@ public class BJ_17144 {
 		for (int i = r-1; i > mechine.get(1)[0]; i--) {
 			graph[i][c-1] = graph[i-1][c-1];
 		}
-		for (int i = r; i >0; i--) {
+		for (int i = c-1; i >0; i--) {
 			graph[mechine.get(1)[0]][i] = graph[mechine.get(1)[0]][i-1];
 		}
 		graph[mechine.get(1)[0]][mechine.get(1)[1]] = -1;
