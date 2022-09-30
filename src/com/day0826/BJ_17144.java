@@ -33,9 +33,7 @@ public class BJ_17144 {
 					mechine.add(new int[] {i,j});
 				}
 			}
-//			System.out.println(Arrays.toString(graph[i]));
 		}
-//		System.out.println(queue.size());
 		// 미세먼지 확산
 		
 		for (int i = 0; i < t; i++) {
@@ -49,7 +47,6 @@ public class BJ_17144 {
 					sum+= graph[i][j];
 				}
 			}
-//			System.out.println(Arrays.toString(graph[i]));
 		}
 		System.out.println(sum);
 		
