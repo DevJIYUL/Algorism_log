@@ -1,17 +1,29 @@
 package com.day0930;
 
-import java.io.BufferedReader;
+import java.io.BufferedReader; 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.MonthDay;
-import java.util.Arrays;
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 // 말이 되고픈 원숭이
 public class BJ1600 {
+	static class Point{
+		int x,y,count,kth;
+
+		public Point(int x, int y, int count, int kth) {
+			super();
+			this.x = x;
+			this.y = y;
+			this.count = count;
+			this.kth = kth;
+		}
+		
+	}
 	static int k,w,h;
 	static int[][] graph;
-	static int[][][] d;
+	static boolean[][][] d;
 	static int[] mondx = {1,0,-1,0};
 	static int[] mondy = {0,-1,0,1};
 	static int[] hordx = {-1,-1,-2,-2,1,1,2,2};
@@ -24,41 +36,45 @@ public class BJ1600 {
 		w = Integer.parseInt(st.nextToken());
 		h = Integer.parseInt(st.nextToken());
 		graph = new int[h][w];
-		d = new int[h][w][k+1];
+		d = new boolean[h][w][k+1];
 		for (int i = 0; i < h; i++) {
 			st = new StringTokenizer(br.readLine().trim());
 			for (int j = 0; j < w; j++) {
 				graph[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		System.out.println(bfs());
 		
-		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < w; j++) {
-				for (int z = 0; z < k; z++) {
-					d[i][j][z] = Integer.MAX_VALUE;
-				}
+	}
+	private static int bfs() {
+		Queue<Point> queue = new ArrayDeque<>();
+		queue.add(new Point(0, 0, 0, 0));
+		d[0][0][0] = true;
+		while (!queue.isEmpty()) {
+			Point temp = queue.poll();
+			int x = temp.x;
+			int y = temp.y;
+			int count = temp.count;
+			int kdx = temp.kth;
+			if(x == h-1 && y == w-1) {
+				return count;
+			}
+			for (int i = 0; i < 4; i++) {
+				int nx = x + mondx[i];
+				int ny = y + mondy[i];
+				if(nx<0||ny<0||nx>=h||ny>=w||graph[nx][ny] == 1||d[nx][ny][kdx])continue;
+				d[nx][ny][kdx] = true;
+				queue.add(new Point(nx, ny, count+1, kdx));
+			}
+			if(k<=kdx)continue;
+			for (int i = 0; i < 8; i++) {
+				int nx = x + hordx[i];
+				int ny = y + hordy[i];
+				if(nx<0||ny<0||nx>=h||ny>=w||graph[nx][ny] == 1||d[nx][ny][kdx+1])continue;
+				d[nx][ny][kdx+1] = true;
+				queue.add(new Point(nx, ny, count+1, kdx+1));
 			}
 		}
-		d[0][0][0] = 1;
-		for (int i = 0; i < h; i++) {
-			for (int j = 0; j < w; j++) {
-				for (int z = 0; z < k; z++) {
-					if(i==0&&j==0)continue;
-					for (int j2 = 0; j2 < 4; j2++) {
-						int px = i + mondx[j2];
-						int py = j + mondy[j2];
-						if(px<0||py<0||px>=h||py>=w) continue;
-						d[i][j][z] = Math.min(d[i][j][z], d[px][py][z]);
-					}
-					for (int j3 = 0; j3 < 8; j3++) {
-						int px = i + hordx[j3];
-						int py = j + hordy[j3];
-						if(px<0||py<0||px>=h||py>=w) continue;
-						d[i][j][z+1] = Math.min(d[i][j][z+1], d[px][py][z-1]);
-					}
-				}
-			}
-		}
-	
+		return -1;		
 	}
 }

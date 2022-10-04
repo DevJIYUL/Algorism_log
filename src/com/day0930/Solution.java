@@ -1,40 +1,36 @@
 package com.day0930;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class Solution {
-	static int t;
-    static int[] num;
-    static int[] list;
-    static boolean[]  visited;
-//	public static void main(String[] args) {
-//		solution(3,5);
-//		
-//	}
-	static int[] solution(int n, long k) {
-    	num = new int[n];
-    	list = new int[n];
-    	visited = new boolean[n];
-		for (int i = 1; i < n+1; i++) {
-			num[i-1] = i;
-		}
-		int[] answer = {};
-		int[] temp = per(0,n,k);
-        return answer;
-    }
-	static int[] per(int count,int n,long k) {
-		if(count == n) {
-//			System.out.println(Arrays.toString(list));
-			t++;
-			if(t==k) return list;
-		}
-		for (int i = 0; i < n; i++) {
-			if(visited[i]) continue;
-			visited[i] = true;
-			list[count] = num[i];
-			per(count+1,n,k);
-			visited[i] = false;
-		}
-		return list;
+    static ArrayList<Integer> num;
+    static long f=1;
+	public static void main(String[] args) {
+		System.out.println(Arrays.toString(solution(5,40)));
 	}
+	static int[] solution(int n, long k) {
+    	num = new ArrayList<>();
+		for (int i = 1; i < n+1; i++) {
+			num.add(i);
+			f*=i;
+		}
+		int[] answer = new int[n];
+		for (int i = n; i > 0; i--) {
+			int dvd = (int)(f/i);
+			if(f-i==0) {
+				dvd=1;
+			}
+			f = dvd;
+			int a = (int) (k/dvd);
+			if(k-dvd==0) a=1;
+			k = (int) k%dvd;
+			if(k==0) {
+				a-=1;
+				k = f;
+			}
+			if(a>=0)answer[n-i] = num.remove(a);
+		}
+		return answer;
+    }
 }
