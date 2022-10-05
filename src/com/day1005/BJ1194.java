@@ -59,6 +59,7 @@ public class BJ1194 {
 	private static int travel() {
 		PriorityQueue<Minsik> pqueue = new PriorityQueue<>((o1,o2)->o1.count!=o2.count?o1.count-o2.count:o2.bit-o1.bit);
 		pqueue.add(new Minsik(zero.x, zero.y, 0, 0));
+		visited[zero.x][zero.y][0] = true;
 //		System.out.println("시작");
 		while (!pqueue.isEmpty()) {
 			Minsik temp = pqueue.poll();
@@ -66,23 +67,21 @@ public class BJ1194 {
 //				System.out.println("출구 찾음!!!!!!");
 				return temp.count;
 			}
-			System.out.println(temp.x+" "+temp.y+" "+temp.count+" "+temp.bit);
 			for (int i = 0; i < 4; i++) {
 				int nx = temp.x + dx[i];
 				int ny = temp.y + dy[i];
 				int nk = temp.bit;
-				if(nx<0||ny<0||nx>=n||ny>=m||graph[nx][ny] == '#') continue;
+				if(nx<0||ny<0||nx>=n||ny>=m||graph[nx][ny] == '#'||visited[nx][ny][nk]) continue;
 				if(graph[nx][ny]>='a' && graph[nx][ny] <= 'f') {
 					int shift = graph[nx][ny] -'a';
 					int key = 1<<shift;
 					nk = temp.bit | key;
-					// 해당키가 temp.bit에 있는지 확인하고 있으면 그냥 너어주고 없다면 넣어서 준다.
 				}else if(graph[nx][ny]>='A' && graph[nx][ny] <= 'F') {
 					int key = 1<<(graph[nx][ny]-'A');
 					if((temp.bit & key)==0)continue;
 				}
 				pqueue.add(new Minsik(nx, ny, temp.count+1, nk));
-				
+				visited[nx][ny][nk] = true;
 			}
 		}
 		return -1;
