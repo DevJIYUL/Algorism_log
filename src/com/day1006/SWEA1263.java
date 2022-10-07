@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
-
+// 사람 네트워크2
 public class SWEA1263 {
 	static int t,n,INF = 100000;
 	static int[][] graph;
