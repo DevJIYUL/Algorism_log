@@ -32,10 +32,10 @@ public class Test1 {
 			for (int j : tree) {
 				if(j>mid) cut += j-mid;
 			}
-			if(m<cut) {
-				end = mid -1;
-			}else {
+			if(m<=cut) {
 				start = mid;
+			}else {
+				end = mid-1;
 			}
 		}
 		return start;

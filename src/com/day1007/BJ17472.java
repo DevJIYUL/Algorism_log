@@ -7,8 +7,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map.Entry;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -36,7 +34,7 @@ public class BJ17472 {
 	static int[] dx = {0,1,0,-1};
 	static int[] dy = {1,0,-1,0};
 	static HashMap<Integer, ArrayList<Point>> islandInfo;
-	static HashSet<Integer> islandVisited;
+	static boolean[] islandVisited;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine().trim());
@@ -44,7 +42,6 @@ public class BJ17472 {
 		m = Integer.parseInt(st.nextToken());
 		graph = new int[n][m];
 		islandInfo = new HashMap<>();
-		islandVisited = new HashSet<>();
 		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine().trim());
 			for (int j = 0; j < m; j++) {
@@ -64,14 +61,21 @@ public class BJ17472 {
 				}
 			}
 		}
-		for (int i = 0; i < n; i++) {
-			System.out.println(Arrays.toString(graph[i]));
-		}
-		System.out.println(islandInfo);
+//		for (int i = 0; i < n; i++) {
+//			System.out.println(Arrays.toString(graph[i]));
+//		}
+//		System.out.println(islandInfo);
 		PriorityQueue<int[]> pqueue = new PriorityQueue<>((o1,o2)->o1[0]-o2[0]);
-		for (Entry<Integer, ArrayList<Point>> info : islandInfo.entrySet()) {
-			// q 0번째가 다리 길이 1번쨰가 시작섬 ,2번쨰가 도착섬
-			for (Point point : info.getValue()) {
+		islandVisited = new boolean[island+1];
+		int edge = -1;
+		boolean flag =false;
+		pqueue.add(new int[] {0,1});
+		while (!pqueue.isEmpty()) {
+			int[] w = pqueue.poll();
+			if(islandVisited[w[1]]) continue;
+			islandVisited[w[1]] = true;
+			bridgeCount += w[0];
+			for (Point point : islandInfo.get(w[1])) {
 				// 섬하나를 4방 탐색한다 한방향으로 쭉 나아가 본다 섬에 도착하면 거리와 섬이름을 pq에 넣어준다.
 				int x = point.x;
 				int y = point.y;
@@ -82,7 +86,8 @@ public class BJ17472 {
 						int ny = y + dy[i]*j;
 						if(nx<0||ny<0||nx>=n||ny>=m||graph[x][y] == graph[nx][ny]) break;
 						if(graph[nx][ny] != 0 && count != 1) {
-							pqueue.add(new int[] {count,graph[x][y],graph[nx][ny]});
+//							islandVisited[graph[nx][ny]] = true;
+							pqueue.add(new int[] {count,graph[nx][ny]});
 							break;
 						}else if(graph[nx][ny] != 0 && count == 1) {
 							break;
@@ -91,40 +96,14 @@ public class BJ17472 {
 					}
 				}
 			}
-		}
-		System.out.println(pqueue.size());
-		System.out.println(island);
-		boolean arrival = false;
-		int edge = 0;
-		while (!pqueue.isEmpty()) {
-			int[] bridge = pqueue.poll();
-			int cnt = bridge[0];
-			int start = bridge[1];
-			int end = bridge[2];
-			if(islandVisited.contains(start) && islandVisited.contains(end))continue;
-			if(!islandVisited.contains(start) || !islandVisited.contains(end)) {
-				islandVisited.add(start);
-				islandVisited.add(end);
-				bridgeCount += cnt;
-				edge++;
-				System.out.println(start+" 섬과 "+end+" 섬 연결 다리 수는 : "+cnt+"  지금 까지 길이 : "+bridgeCount );
-			}
+			edge++;
 			if(edge == island-1) {
-				arrival = true;
+				flag = true;
 				break;
 			}
 		}
-		if(!arrival) {
-			System.out.println(-1);
-		}else {
-			System.out.println(bridgeCount);
-		}
+		System.out.println(flag?bridgeCount:-1);
 	}
-
-
-
-
-
 
 	private static void draw(int i, int j) {
 		Queue<int[]> queue = new ArrayDeque<int[]>();
