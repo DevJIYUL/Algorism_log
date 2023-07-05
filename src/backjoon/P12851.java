@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Bj12851 {
+public class P12851 {
 	static int n,k,result,count,m;
 	static boolean[] visited = new boolean[100001];
 	public static void main(String[] args) throws Exception{

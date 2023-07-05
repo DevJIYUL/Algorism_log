@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 // 미친 로봇
-public class Bj1405 {
+public class P1405 {
 	static int n,E,W,S,N;
 	static double[] per;
 	static boolean[][] visited;

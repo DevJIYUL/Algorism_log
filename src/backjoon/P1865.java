@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class Bj1865 {
+public class P1865 {
 	static int testcase;
 	static boolean flag;
 	static int[] distance;

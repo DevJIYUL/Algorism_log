@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Bj1043 {
+public class P1043 {
 	static int n,m,answer;
 	static int[] parent;
 	static boolean[] true_peo;

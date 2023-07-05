@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class Bj1208 {
+public class P1208 {
 	static int n , s;
 	static long count ;
 	static int[] left,right;

@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Bj2042 {
+public class P2042 {
 	static int n,m,k;
 	static long[] a,tree;
 	public static void main(String[] args) throws Exception{

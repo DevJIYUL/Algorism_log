@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /* 행렬 제곱 */
-public class Bj10830 {
+public class P10830 {
 	static int[][] basic;
 	static int n;
 	static long b;

@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 /* 이진 검색 트리*/
-public class Bj5639 {
+public class P5639 {
 
 	static class Node{
 		int parent;

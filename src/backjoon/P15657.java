@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class Bj15657 {
+public class P15657 {
 	static int n,m;
 	static int[] arr,rep;
 	public static void main(String[] args) throws Exception{

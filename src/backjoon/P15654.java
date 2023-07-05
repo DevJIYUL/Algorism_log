@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class Bj15654 {
+public class P15654 {
 	static int n,m,result;
 	static int[] array,arr;
 	static boolean[] visited;

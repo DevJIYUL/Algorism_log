@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class Bj1509 {
+public class P1509 {
 	static String sentance;
 	static int[] dp;
 	static boolean[][] visited;

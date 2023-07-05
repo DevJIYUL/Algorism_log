@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-public class Bj11444 {
+public class P11444 {
 	static long n;
 	static TreeMap<Long, Long> h;
 	public static void main(String[] args) throws Exception{
