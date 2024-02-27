@@ -33,7 +33,7 @@ public class P9372 {
 			int result = 0;
 			boolean[] visited = new boolean[nation+1];
 			for (int j = 1; j < nation+1; j++) {
-				if(!visited[i]) {
+				if(!visited[j]) {
 //					System.out.println(Arrays.toString(visited));
 					result += bfs(j,visited,graph);
 //					System.out.println(Arrays.toString(visited));

@@ -19,11 +19,12 @@ public class P2110 {
 			arr[i] = input;
 		}
 		Arrays.sort(arr);
-		int left = arr[0];
+		int left = 1;
 		int right = arr[n-1];
-		int answer = 0 ;
-		while (right>left) {
-			int mid = (right+left)/2;
+		int mid = 0 ;
+		int answer = 0;
+		while (right>=left) {
+			mid = (right+left)/2;
 			int result = count(mid);
 			if(result >= c) {
 				left = mid+1;

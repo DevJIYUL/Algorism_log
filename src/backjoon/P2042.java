@@ -2,6 +2,7 @@ package backjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class P2042 {
@@ -28,6 +29,8 @@ public class P2042 {
 			if(e==1) update(a,tree,1,0,n-1,b-1,c);
 			else System.out.println(quary(a,tree,1,0,n-1,b-1,c-1));
 		}
+		System.out.println("a : "+Arrays.toString(a));
+		System.out.println("tree : "+Arrays.toString(tree));
 	}
 	private static long quary(long[] a, long[] tree, int node, int start, int end, int left, long right) {
 		if(right < start || left > end)return 0;
